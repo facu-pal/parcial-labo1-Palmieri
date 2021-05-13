@@ -11,6 +11,7 @@
 int main(void) {
 	setbuf(stdout, NULL);
 	int menu;
+	int contContribuyente = 0;
 	int idContribuyente = 999;
 
 	//CREO ARRAY DE ESTRUCTURA
@@ -35,13 +36,23 @@ int main(void) {
 		scanf("%d", &menu);
 		switch (menu) {
 		case 1:
-			if (eContribuyente_Alta(contribuyente, TAMESTRUCTA,&idContribuyente)) {
+			if (eContribuyente_Alta(contribuyente, TAMESTRUCTA, &idContribuyente)) {
 				printf("El contribuyente se a dado de alta correctamente");
+				contContribuyente++;
 			} else {
-				printf("ERROR. El contribuyente no se a dado de alta correctamente");
+				printf(
+						"ERROR. El contribuyente no se a dado de alta correctamente");
 			}
 			break;
 		case 2:
+			/*if (contContribuyente != 0) {
+				if (eContribuyente_Modificacion(contribuyente, TAMESTRUCTA)) {
+					printf("Se modifico correctamente contribuyente\n");
+					eContribuyente_MostrarTodos(contribuyente, contribuyente);
+				} else {
+					puts("No se modifico el contribuyente");
+				}
+			}*/
 
 			break;
 		case 3:
