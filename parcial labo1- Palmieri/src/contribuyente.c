@@ -52,7 +52,7 @@ int eContribuyente_BuscarPorID(eContribuyente array[], int TAM, int ID) {
 }
 
 void eContribuyente_MostrarUno(eContribuyente Contribuyente) {
-	printf("%5d\n", Contribuyente.idContribuyente);
+	printf("%3d               %7s	     %5s	    %8s \n", Contribuyente.idContribuyente, Contribuyente.nombre, Contribuyente.apellido, Contribuyente.cuit);
 }
 
 int eContribuyente_MostrarTodos(eContribuyente array[], int TAM) {
@@ -60,8 +60,8 @@ int eContribuyente_MostrarTodos(eContribuyente array[], int TAM) {
 	int rtn = 0;
 	int cantidad = 0;
 
-	printf("\n LISTADO Contribuyente");
-	printf("%5s\n\n", "ID"); // %3d         %8s	      %2c          %.2f         %.2f        %.2f)
+	printf("\n LISTADO Contribuyente\n");
+	printf("idContribuyente        nombre        apellido        cuit        \n"); // %3d         %8s	      %2c          %.2f         %.2f        %.2f)
 
 	if (array != NULL && TAM > 0) {
 		for (i = 0; i < TAM; i++) {
@@ -81,9 +81,9 @@ int eContribuyente_MostrarTodos(eContribuyente array[], int TAM) {
 
 int eContribuyente_Alta(eContribuyente array[], int TAM, int *id) {
 	int rtn = 0;
-	int auxNombre = 0;
-	int auxApellido = 0;
-	int auxCuit = 0;
+	int auxNombre ;
+	int auxApellido ;
+	int auxCuit ;
 	eContribuyente auxContribuyente;
 
 	int index = eContribuyente_ObtenerIndexLibre(array, TAM);
@@ -99,11 +99,9 @@ int eContribuyente_Alta(eContribuyente array[], int TAM, int *id) {
 		auxContribuyente.idContribuyente = eContribuyente_ObtenerID(id);
 		auxContribuyente.isEmpty = OCUPADO;
 
-		if (auxNombre != -1 && auxApellido != -1 && auxCuit != -1){
-
+		if (auxNombre == 0 && auxApellido == 0 && auxCuit == 0){
 			array[index] = auxContribuyente;
-
-		rtn = 1;
+			rtn = 1;
 		}
 		else{
 			rtn = 0;
@@ -113,25 +111,18 @@ int eContribuyente_Alta(eContribuyente array[], int TAM, int *id) {
 
 	return rtn;
 }
-eContribuyente eContribuyente_ModificarUno(eContribuyente Contribuyente) {
-	eContribuyente auxiliar = Contribuyente;
-	/** MODIFICAR DATOS NECESARIOS PARA EL "MODIFICAR" */
-	utn_getString(auxiliar.nombre, 25, "Ingrese el nuevo nombre",
-			"Error. Ingrese el nuevo nombre", 2);
-	utn_getString(auxiliar.apellido, 25, "Ingrese el nuevo apellido",
-			"Error. Ingrese el nuevo apellido", 2);
-	utn_getCuit(auxiliar.cuit, "ingrese el nueve cuit",
-			"error.ingrese el nuevo cuit ", 2);
 
-	/** IMPORTANTE - MODIFICAR EL AUXILIAR QUE ES LA COPIA DEL ORIGINAL */
-	return auxiliar;
-}
 
 int eContribuyente_Modificacion(eContribuyente array[], int TAM) {
 	int rtn = 0;
 	int idContribuyente;
 	int index;
 	int flag = 0;
+
+	int auxNombre = 0;
+	int auxApellido = 0;
+	int auxCuit = 0;
+
 	eContribuyente auxiliar;
 
 	//LISTO TODOS LOS Contribuyente
@@ -143,16 +134,15 @@ int eContribuyente_Modificacion(eContribuyente array[], int TAM) {
 	//SI HAY Contribuyente PARA MODIFICAR
 	if (flag) {
 		//PIDO ID A MODIFICAR
-		/**USAR FUNCION GET_INT DE LIBRERIA DE INPUTS*/
-		printf("INGRESE ID A DAR DE BAJA: ");
+		printf("Ingrese id a modificar: ");
 		scanf("%d", &idContribuyente);
 
 		//BUSCO INDEX POR ID EN ARRAY
 		while (eContribuyente_BuscarPorID(array, TAM, idContribuyente) == -1) {
-			puts("NO EXISTE ID.");
+			printf("no existe id \n.");
 
 			/**USAR FUNCION GET_INT DE LIBRERIA DE INPUTS*/
-			printf("INGRESE ID A DAR DE BAJA: ");
+			printf("Ingrese id a modificar : ");
 			scanf("%d", &idContribuyente);
 		}
 
@@ -160,14 +150,24 @@ int eContribuyente_Modificacion(eContribuyente array[], int TAM) {
 		index = eContribuyente_BuscarPorID(array, TAM, idContribuyente);
 
 		//LLAMO A FUNCION QUE MODIFICA Contribuyente
-		auxiliar = eContribuyente_ModificarUno(array[index]);
+		//auxiliar = eContribuyente_ModificarUno(array[index]);
+		auxNombre = utn_getString(auxiliar.nombre, 25, "Ingrese el nuevo nombre","Error. Ingrese el nuevo nombre", 2);
+		auxApellido =	utn_getString(auxiliar.apellido, 25, "Ingrese el nuevo apellido","Error. Ingrese el nuevo apellido", 2);
+		auxCuit =	utn_getCuit(auxiliar.cuit, "ingrese el nueve cuit",	"error.ingrese el nuevo cuit ", 2);
+		auxiliar.idContribuyente = array[index].idContribuyente;
+		auxiliar.isEmpty = OCUPADO;
 
-		/**PREGUNTAR SI DESEA CONTINUAR*/
-		//MODIFICACION ACEPTADA
-		array[index] = auxiliar;
 
-		//RETORNO 1 SI SE MODIFICO CORRECTAMENTE
-		rtn = 1;
+
+		if (auxNombre == 0 && auxApellido == 0 && auxCuit == 0){
+			array[index] = auxiliar;
+			rtn = 1;
+		}
+		else{
+			rtn = 0;
+		}
+
+
 	}
 
 	return rtn;

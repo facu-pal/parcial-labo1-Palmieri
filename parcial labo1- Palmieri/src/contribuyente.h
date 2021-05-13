@@ -31,7 +31,6 @@ int eContribuyente_MostrarTodos(eContribuyente array[], int TAM);
 int eContribuyente_MostrarDadosDeBaja(eContribuyente array[], int TAM);
 
 //ABM
-eContribuyente eContribuyente_ModificarUno(eContribuyente Contribuyente);
 int eContribuyente_Alta(eContribuyente array[], int TAM,int *id);
 int eContribuyente_Baja(eContribuyente array[], int TAM);
 int eContribuyente_Modificacion(eContribuyente array[], int TAM);

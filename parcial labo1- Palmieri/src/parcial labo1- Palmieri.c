@@ -45,14 +45,14 @@ int main(void) {
 			}
 			break;
 		case 2:
-			/*if (contContribuyente != 0) {
+			if (contContribuyente != 0) {
 				if (eContribuyente_Modificacion(contribuyente, TAMESTRUCTA)) {
 					printf("Se modifico correctamente contribuyente\n");
-					eContribuyente_MostrarTodos(contribuyente, contribuyente);
+					eContribuyente_MostrarTodos(contribuyente, TAMESTRUCTA);
 				} else {
 					puts("No se modifico el contribuyente");
 				}
-			}*/
+			}
 
 			break;
 		case 3:
