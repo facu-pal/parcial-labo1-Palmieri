@@ -31,9 +31,8 @@ int eRecaudacion_MostrarTodos(eRecaudacion array[], int TAM);
 int eRecaudacion_MostrarDadosDeBaja(eRecaudacion array[], int TAM);
 
 //ABM
-eRecaudacion eRecaudacion_CargarDatos(void);
-eRecaudacion eRecaudacion_ModificarUno(eRecaudacion Recaudacion);
-int eRecaudacion_Alta(eRecaudacion array[], int TAM);
+
+int eRecaudacion_Alta(eRecaudacion array[], int TAM, int *id);
 int eRecaudacion_Baja(eRecaudacion array[], int TAM);
 int eRecaudacion_Modificacion(eRecaudacion array[], int TAM);
 

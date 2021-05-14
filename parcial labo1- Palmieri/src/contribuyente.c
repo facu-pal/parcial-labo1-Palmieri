@@ -173,3 +173,46 @@ int eContribuyente_Modificacion(eContribuyente array[], int TAM) {
 	return rtn;
 }
 
+int eContribuyente_Baja(eContribuyente array[], int TAM) {
+	int rtn = 0;
+	int idContribuyente;
+	int index;
+	int flag = 0;
+	char opcion;
+
+	//LISTO TODOS LOS Contribuyente
+	if (eContribuyente_MostrarTodos(array, TAM)) {
+		//BANDERA EN 1 SI HAY Contribuyente DADOS DE ALTA PARA LISTAR
+		flag = 1;
+	}
+
+	//SI HAY Contribuyente PARA DAR DE BAJA
+	if (flag) {
+		//PIDO ID A DAR DE BAJA
+		/**USAR FUNCION GET_INT DE LIBRERIA DE INPUTS*/
+		printf("INGRESE ID A DAR DE BAJA: ");
+		scanf("%d", &idContribuyente);
+
+		//BUSCO INDEX POR ID EN ARRAY
+		while (eContribuyente_BuscarPorID(array, TAM, idContribuyente) == -1) {
+			puts("NO EXISTE ID.");
+
+			/**USAR FUNCION GET_INT DE LIBRERIA DE INPUTS*/
+			printf("INGRESE ID A DAR DE BAJA: ");
+			scanf("%d", &idContribuyente);
+		}
+
+		//OBTENGO INDEX DEL ARRAY DE Contribuyente A DAR DE BAJA
+		index = eContribuyente_BuscarPorID(array, TAM, idContribuyente);
+		 utn_getCharOpciones(&opcion,"Desea darlo de baja (s para si o n para no)","Error.Desea darlo de baja (s para si o n para no)",'s','n',3);
+		if(opcion == 's'){
+		array[index].isEmpty = BAJA;
+		}
+		//RETORNO 1 SI SE DIO DE BAJA CORRECTAMENTE
+		rtn = 1;
+	}
+
+	return rtn;
+}
+
+

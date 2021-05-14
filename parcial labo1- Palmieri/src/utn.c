@@ -167,7 +167,7 @@ int utn_getCharOpciones(char *input, char mensaje[], char errorMensaje[], char o
 		scanf("%c", &buffer);
 		for (i = 0; i < intentos; ++i) {
 			aux = isdigit(buffer);
-			if (buffer >= opcionA && buffer <= opcionB && aux == 0) {
+			if ((buffer == opcionA || buffer == opcionB) && aux == 0) {
 				*input = buffer;
 				ret = 0;
 				break;

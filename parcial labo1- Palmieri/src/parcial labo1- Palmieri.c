@@ -13,14 +13,15 @@ int main(void) {
 	int menu;
 	int contContribuyente = 0;
 	int idContribuyente = 999;
+	int idRecaudacion = 99;
 
 	//CREO ARRAY DE ESTRUCTURA
 	eContribuyente contribuyente[TAMESTRUCTA];
-	//eRecaudacion recaudacion[TAMESTRUCTA];
+	eRecaudacion recaudacion[TAMESTRUCTA];
 
 	//INICIALIAZO ARRAY DE ESTRUCTURA
 	eContribuyente_Inicializar(contribuyente, TAMESTRUCTA);
-	//eRecaudacion_Inicializar(recaudacion, TAMESTRUCTA);
+	eRecaudacion_Inicializar(recaudacion, TAMESTRUCTA);
 
 	do {
 		printf("\n Menu\n");
@@ -49,6 +50,8 @@ int main(void) {
 				if (eContribuyente_Modificacion(contribuyente, TAMESTRUCTA)) {
 					printf("Se modifico correctamente contribuyente\n");
 					eContribuyente_MostrarTodos(contribuyente, TAMESTRUCTA);
+					contContribuyente--;
+
 				} else {
 					puts("No se modifico el contribuyente");
 				}
@@ -56,10 +59,14 @@ int main(void) {
 
 			break;
 		case 3:
-
+			eContribuyente_Baja(contribuyente, TAMESTRUCTA );
+			contContribuyente--;
 			break;
 		case 4:
-
+			if (contContribuyente != 0) {
+			eContribuyente_MostrarTodos(contribuyente, TAMESTRUCTA);
+			eRecaudacion_Alta(recaudacion ,TAMESTRUCTA, &idRecaudacion);
+			}
 			break;
 		case 5:
 
